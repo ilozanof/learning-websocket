@@ -18,15 +18,19 @@ In this example, we have:
    * *broadcastClient.html*: The HTML containing the user interface
    * *clientCommon.css": Commons styles for all the examples in this project.
    * *clientCommon.js": Commons JS functions
-   * messageHandling.js": Implementation of fiunctions responsible for encoding/decoding messages from/to the WebSocket.
+   * messageHandling.js": Implementation of functions responsible for encoding/decoding messages from/to the WebSocket.
    
 ### How to test it
 * To test the Java client & Server communications, just run the tests.
 * To test the HTML Client & Server communications, do as follows:
-    * run the Server. You can *run/debug* the server by executing the *src/main/java/com/ilozanof/learning/websocket/WebsocketServer.java*. 
-    This will start the server and leave it un the background waiting for requests.
-    * Open the "src/main/resources/broadcastClient.html" file in a web browser, type a message and click on *Send*. The smae message will be displayed below, which after nbeing sent to the Server and back to the client.
+    * Run the Server. You can *run/debug* the server by executing the *src/main/java/com/ilozanof/learning/websocket/WebsocketServer.java*. 
+    This will start the server and leave it running in the background waiting for requests.
+    * Open the *src/main/resources/broadcastClient.html* file in a web browser, type a message and click on *Send*. The smae message will be displayed below, which after nbeing sent to the Server and back to the client.
     You can open different browsers at the same time, to check that the message sent by any of them is broadcasted to them all. 
+   
+   ![](doc/broadcastSafari.png)
+   
+   ![](doc/broadcastChrome.png)
    
  ### broadcast Advanced
  
