@@ -1,0 +1,25 @@
+/*
+ * nchain-safewallet-websocket project
+ *
+ * Gradle build
+ */
+
+apply plugin: "java"
+
+description = "Implementation of the communication Browser - Wallet App"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+    compile     "ch.qos.logback:logback-classic:1.2.3"
+    compile     "javax.websocket:javax.websocket-api:1.1"
+    compile     "org.eclipse.jetty:jetty-server:9.4.10.v20180503"
+    compile     "org.eclipse.jetty:jetty-servlet:9.4.10.v20180503"
+    compile     "org.eclipse.jetty.websocket:javax-websocket-server-impl:9.4.10.v20180503"
+    compile     "com.google.code.gson:gson:2.8.5"
+}

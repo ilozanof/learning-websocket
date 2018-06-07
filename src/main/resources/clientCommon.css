@@ -1,0 +1,50 @@
+/* Common Styles */
+
+body {
+    margin: 10px;
+    font: 12px Arial;
+}
+
+h1 {margin-bottom:20px;}
+label {float:left;margin-top:10px;}
+input {
+    border: 1px solid #aaaaaa;
+    border-radius: 2px;
+    padding:5px;
+}
+button {
+    background-color: #eeeeee;
+    border: 1px solid #aaaaaa;
+    padding:5px 20px 5px 20px;
+}
+.box {
+    background-color: #ededed;
+    border: 1px solid #aaaaaa;
+    border-radius: 2px;
+    padding: 10px;
+    overflow: auto;
+}
+
+.invisibleBox {
+    padding: 10px;
+    overflow: auto;
+    margin-left:auto;
+    margin-right:auto;
+    width: 90%;
+    margin: 10px;
+    padding:10px;
+}
+
+.messageBox {
+    background-color: #dddddd;
+    padding: 5px;
+    border-bottom: 1px solid #bbbbbb;
+    margin-bottom: 5px;
+}
+.messageBox ul {font-weight: bold; margin-bottom:5px;}
+.messageBox ul li {list-style-type: none; font-weight: normal;}
+.userInput {
+    float:left;
+    margin-left:20px;
+    width:50%;
+}
