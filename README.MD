@@ -13,12 +13,20 @@ This project contains different examples of the use of *Websockets* (see below c
 In this example, we have:
  * 1 Endpoint in the Server. 
    It keeps track of all the Sessions opened by different clientes, and for each Message it receives, it sends it back to ALL the clients (including the one who sent it).
- * 1 Java Client that sends messages and also works as a Listener for incoming messags feom the Server.
+ * 1 Java Client that sends messages and also works as a Listener for incoming messags from the Server.
  * 1 Web Client, implemented in (HTML + CSS + JS + jQuery). The source code is composed of the following files:
    * *broadcastClient.html*: The HTML containing the user interface
    * *clientCommon.css": Commons styles for all the examples in this project.
    * *clientCommon.js": Commons JS functions
    * messageHandling.js": Implementation of fiunctions responsible for encoding/decoding messages from/to the WebSocket.
+   
+### How to test it
+* To test the Java client & Server communications, just run the tests.
+* To test the HTML Client & Server communications, do as follows:
+    * run the Server. You can *run/debug* the server by executing the *src/main/java/com/ilozanof/learning/websocket/WebsocketServer.java*. 
+    This will start the server and leave it un the background waiting for requests.
+    * Open the "src/main/resources/broadcastClient.html" file in a web browser, type a message and click on *Send*. The smae message will be displayed below, which after nbeing sent to the Server and back to the client.
+    You can open different browsers at the same time, to check that the message sent by any of them is broadcasted to them all. 
    
  ### broadcast Advanced
  
