@@ -44,3 +44,6 @@ In this example, we have:
  
  
  
+   | ![](doc/broadcastAdvancedSafari.png) | ![](doc/broadcastAdvancedChrome.png)|
+   --- | ---
+ 
