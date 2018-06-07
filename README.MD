@@ -28,6 +28,7 @@ In this example, we have:
     * Open the *src/main/resources/broadcastClient.html* file in a web browser, type a message and click on *Send*. The smae message will be displayed below, which after nbeing sent to the Server and back to the client.
     You can open different browsers at the same time, to check that the message sent by any of them is broadcasted to them all. 
    
+   
    | ![](doc/broadcastSafari.png) | ![](doc/broadcastChrome.png)|
    --- | ---
  
