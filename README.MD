@@ -39,7 +39,13 @@ In this example, we have:
  between the client and the server is NOT plain text, but a *Message* object.
  
  All the explanations for the previous example also apply for this one, with some additions in the form of:
-  * A new *Message* class
+  * A new *Message* class implementing the Messages exchanged, for example:
+  
+  > Message structure (3 fields):
+  > * **from**: "a Java client/machine/browser, etc"
+  > * **content**: "Hi, this is a message"
+  > * **version**: "1.0"
+  
   * Encoders and decoders in the Server side for *Message* objects.
  
  
