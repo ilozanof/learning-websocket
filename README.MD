@@ -1,17 +1,5 @@
 # learning-websocket
 
-##Table of contents
- * [Introduction](#Introduction)
- * [Structure of the  examples](#Structure-of-the-examples)
-    * [broadcast](#broadcast)
-        * [How to test the Server and Java Clients](#How-to-test-the-Server-and-Java-Clients)
-        * [How to run the Server and HTML Clients](#How-to-run-the-Server-and-HTML-Clients)
-            * [Testing the HTML Client with HTTP](#Testing-the-HTML-Client-with-HTTP)
-            * [Testing the HTML Client with HTTP & SSL](#Testing-the-HTML-Client-with-HTTP-&-SSL)
-    * [broadcast](#broadcast-Advanced)
-
-## Introduction
-
 This project contains different examples of the use of *Websockets* (see below chapters for explanations of each example).
 
 > **NOTE**: 
