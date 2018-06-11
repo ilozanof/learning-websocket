@@ -2,8 +2,11 @@
  * Implementation of the functions for the broadcast Advanced Example.
  */
 
-function getWebSocketUrl() {
-    return "ws://127.0.0.1:8080/broadcastAdvanced";
+function getWebSocketUrl(useSSL) {
+    if (useSSL)
+        return "wss://127.0.0.1:8443/broadcastAdvanced";
+    else
+        return "ws://127.0.0.1:8080/broadcastAdvanced";
 }
 
 function encodeMessage(msg) {

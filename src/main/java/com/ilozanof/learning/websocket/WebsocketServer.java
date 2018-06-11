@@ -1,70 +1,75 @@
 package com.ilozanof.learning.websocket;
 
-import com.ilozanof.learning.websocket.broadcast.server.BroadcastEndpoint;
-import com.ilozanof.learning.websocket.broadcastAdvanced.server.BroadcastAdvancedEndpoint;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 
 import javax.websocket.server.ServerContainer;
+import java.util.List;
 
 /**
- * This class launches a webserver (a Jetty server) and add some websockets
- * end ooints to it.
+ * This class launches a webserver (a Jetty server) and adds some websockets
+ * and ooints to it.
  */
-public class WebsocketServer {
+public abstract class WebsocketServer {
+
+
+    // Jetty Server variables...
+    protected Server server = null;
+    protected ServletContextHandler context = null;
+
 
     /**
-     * Initilize the Netty Server, register the websocket endpoints in it,
-     * and launches it.
-     *
-     * @param port                  web server port number
-     * @param endpointClasses       Array with the websocket endpoints to
-     *                              register (@ServerEndpoint annotated classes)
+     * Initialize the default ROOT context
      */
-    public static void startServer(int port, Class ...endpointClasses)  {
-        try {
-            // We create the Jetty Web Server...
-            Server server = new Server();
+    private void initContext() {
+        context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+    }
 
-            // We set up the
-            ServerConnector connector = new ServerConnector(server);
-            connector.setPort(port);
-            server.addConnector(connector);
+    // This method will hage to be implemented by all the subclasses from this one.
+    protected abstract List<ServerConnector> getConnectors();
 
-            // We set up the ROOT applicatiopn context...
-            ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-            context.setContextPath("/");
-            server.setHandler(context);
-
-            // We add the Websocket endpoints, if any
-            if (endpointClasses != null) {
-                ServerContainer wscontainer = WebSocketServerContainerInitializer.configureContext(context);
-                for (Class endpointClass : endpointClasses) {
-                    wscontainer.addEndpoint(endpointClass);
-                }
+    /**
+     * It adds several websocket endpoints to this Server Configuration
+     *
+     * @param endpointClasses   Classes annotated with @ServerEndpoint
+     * @throws Exception
+     */
+    private void addWebsocketEndpoints(Class ...endpointClasses) throws Exception {
+        if (endpointClasses != null) {
+            ServerContainer wscontainer = WebSocketServerContainerInitializer.configureContext(context);
+            for (Class endpointClass : endpointClasses) {
+                wscontainer.addEndpoint(endpointClass);
             }
+        }
+    }
 
-            // we start the Server...
+    /**
+     * Launches the Server, with the Endpoints specified, and keeps it running in the background
+     * until this process is killed.
+     *
+     * @param endpointClasses classes annotated with @ServerEndpoint
+     */
+    public void start(Class ...endpointClasses) {
+        try {
+            this.server = new Server();
+            List<ServerConnector> connectors = getConnectors();
+
+            for (ServerConnector serverConnector : connectors) {
+                server.addConnector(serverConnector);
+            }
+            this.initContext();
+            this.addWebsocketEndpoints(endpointClasses);
+
             server.start();
             server.dumpStdErr();
             server.join();
         } catch (Exception e) {
-            System.out.println("EROR starting the Server!!!");
             e.printStackTrace();
         }
-
-    }
-
-    /**
-     * Main method. If you want to start the Server out of the scope of a JunitTest, use
-     * this method.
-     * @param args
-     */
-    public static void main(String ...args) {
-        WebsocketServer.startServer(8080, BroadcastEndpoint.class,
-                                                BroadcastAdvancedEndpoint.class);
 
     }
 

@@ -12,9 +12,19 @@
 </br>
     <div class="box" style="width:500px;margin-left:auto;margin-right:auto;">
         <h1>Broadcast client</h1></h1>
-        <label for="message">Message:</label>
-        <input id="message" type="text" name="message" class="userInput"/>
-        <button id="sendButton">Send</button>
+
+        <div class="invisibleBox">
+            <input name="connectionType" type="radio" value="http" checked> HTTP
+            <input name="connectionType" type="radio" value="ssl" /> SSL
+            <pre id="websocketUrl"></pre>
+        </div>
+
+        <div class="invisibleBox">
+            <label for="message">Message:</label>
+            <input id="message" type="text" name="message" class="userInput"/>
+            <button id="sendButton">Send</button>
+        </div>
+
         <div id="messagesBox" class="invisibleBox" />
     </div>
 

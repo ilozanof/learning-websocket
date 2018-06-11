@@ -48,3 +48,5 @@ button {
     margin-left:20px;
     width:50%;
 }
+
+#websocketUrl {display:inline; margin-left:20px; color:#aaaaaa;}

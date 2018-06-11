@@ -1,13 +1,25 @@
 # learning-websocket
 
+##Table of contents
+ * [Introduction](#Introduction)
+ * [Structure of the  examples](#Structure-of-the-examples)
+    * [broadcast](#broadcast)
+        * [How to test the Server and Java Clients](#How-to-test-the-Server-and-Java-Clients)
+        * [How to run the Server and HTML Clients](#How-to-run-the-Server-and-HTML-Clients)
+            * [Testing the HTML Client with HTTP](#Testing-the-HTML-Client-with-HTTP)
+            * [Testing the HTML Client with HTTP & SSL](#Testing-the-HTML-Client-with-HTTP-&-SSL)
+    * [broadcast](#broadcast-Advanced)
+
+## Introduction
+
 This project contains different examples of the use of *Websockets* (see below chapters for explanations of each example).
 
 > **NOTE**: 
-> All the following examples make use of an embedded web server, the **Netty** server. This server is included as a dependency library in *gradle* (see *build.gradle*), and it's needed for all the tests to work.
+> All the following examples make use of an embedded web server, the **Jetty** server. This server is included as a dependency library in *gradle* (see *build.gradle*), and it's needed for all the tests to work.
 
-> The class *com.ilozanof.learning.websocket.WebsocketServer.java* takes care of running this server, and it's used by all the Tests in this project. We can use this class to "register" in the server the websockets endpoints and launch the sever right before we run the Clients.
+> The classes *com.ilozanof.learning.websocket.WebsocketHttpServer.java* and *com.ilozanof.learning.websocket.WebsocketSecureServer.java* take care of running this server, and it's used by all the Tests in this project.
 
-## Structure of the  examples
+## Structure of the examples
 
 ### broadcast
 In this example, we have:
@@ -20,17 +32,43 @@ In this example, we have:
    * *clientCommon.js": Commons JS functions
    * messageHandling.js": Implementation of functions responsible for encoding/decoding messages from/to the WebSocket.
    
-### How to test it
-* To test the Java client & Server communications, just run the tests.
-* To test the HTML Client & Server communications, do as follows:
-    * Run the Server. You can *run/debug* the server by executing the *src/main/java/com/ilozanof/learning/websocket/WebsocketServer.java*. 
-    This will start the server and leave it running in the background waiting for requests.
-    * Open the *src/main/resources/broadcastClient.html* file in a web browser, type a message and click on *Send*. The smae message will be displayed below, which after nbeing sent to the Server and back to the client.
-    You can open different browsers at the same time, to check that the message sent by any of them is broadcasted to them all. 
-   
-   
-   | ![](doc/broadcastSafari.png) | ![](doc/broadcastChrome.png)|
+#### How to test the Server and Java Clients
+Just run the tests.
+
+#### How to run the Server and HTML Clients
+In this case, we need to run the Server first, and then test the HTML pages. And depending on whether we are testing *HTTP* or *SSL*, there are some minor
+ things that we need to be aware of:
+ 
+##### Testing the HTML Client with HTTP
+Nothing special needs to be done here, since both Server implementations (*WebsocketHttpSever* and *WebsocketSecureServer*) include HTTP support in the port 8080.
+So open the file *src/main/resources/webClient/broadcastClient.html* file in a web browser, that will show the Client pre-configured for HTTP. Now you can type and send messages, 
+and they will be displayed below in the page, after being sent to the Server and back to the client. You can open different browsers at the same time, to check that 
+the messages are broadcasted to all of them...
+
+* NOTE: If you try to select **SSL** in the Web client, you'll get an error due tot hje certificate  this example is using. To fix thst issue, go to the
+next chapter.
+
+  | ![](doc/broadcastSafari.png) | ![](doc/broadcastChrome.png)|
    --- | ---
+ 
+ 
+##### Testing the HTML Client with HTTP & SSL
+
+If you try to select the *SSL* option in the example from the previoopus chapter, you will get an error.
+In order to enable *SSL* you must do the following:
+
+ 1. Make sure that the Server is NOT running (make sure the *WebsocketHttpServer* class has stopped).
+ 2. Run the *WebsocketSecureServer* class.
+ 3. Open the file *src/main/resources/webClient/broadcastClient.html* file in a Web browser. DO NOT select the **SSL** option yet.
+ 4. the **SSL** option triggers an error because the SSL Server is configured with a self-signed certificate, which might be fine 
+  for testing purposes, but it will trigger an error unless we tell the browser to *trust* that certificate. So in order to do 
+  that:
+     1. Open a new *Tab* in the same browser
+     2. Type the url: ``https://localhost:8443``. This will show an Alert window, saying that you are accessing a page signed with a non trusted
+     certificate. The way forward here might depend on the browser: in Chrome, click on "Advanved", and then on "Proceed to 127.0.0.1 (unsafe)". 
+     This will make the browser trust our test certificate.
+     3. Go back to the src/main/resources/webClient/broadcastClient.html file asn refresh.
+   
  
    
  ### broadcast Advanced
@@ -48,6 +86,9 @@ In this example, we have:
   
   * Encoders and decoders in the Server side for *Message* objects.
  
+ 
+ #### How to test it
+ All the guidelines explained for the *Broadcast* client also apply here.
  
  
    | ![](doc/broadcastAdvancedSafari.png) | ![](doc/broadcastAdvancedChrome.png)|

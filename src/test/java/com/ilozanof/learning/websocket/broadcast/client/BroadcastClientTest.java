@@ -1,5 +1,6 @@
 package com.ilozanof.learning.websocket.broadcast.client;
 
+import com.ilozanof.learning.websocket.WebsocketHttpServer;
 import com.ilozanof.learning.websocket.WebsocketServer;
 import com.ilozanof.learning.websocket.broadcast.server.BroadcastEndpoint;
 import org.junit.Before;
@@ -25,7 +26,8 @@ public class BroadcastClientTest {
     private void startServer() {
         try {
             new Thread(() -> {
-                WebsocketServer.startServer(SERVER_PORT, BroadcastEndpoint.class);
+                WebsocketHttpServer httpServer = WebsocketHttpServer.getInstance(SERVER_PORT);
+                httpServer.start(BroadcastEndpoint.class);
             }).start();
         } catch (Exception e) {
             e.printStackTrace();
