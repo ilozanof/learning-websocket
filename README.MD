@@ -33,7 +33,7 @@ So open the file *src/main/resources/webClient/broadcastClient.html* file in a w
 and they will be displayed below in the page, after being sent to the Server and back to the client. You can open different browsers at the same time, to check that 
 the messages are broadcasted to all of them...
 
-* NOTE: If you try to select **SSL** in the Web client, you'll get an error due tot hje certificate  this example is using. To fix thst issue, go to the
+* NOTE: If you try to select **SSL** in the Web client, you'll get an error due to the certificate this example is using. To fix that issue, go to the
 next chapter.
 
   | ![](doc/broadcastSafari.png) | ![](doc/broadcastChrome.png)|
